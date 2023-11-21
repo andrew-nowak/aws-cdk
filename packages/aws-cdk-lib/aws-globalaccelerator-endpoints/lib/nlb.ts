@@ -14,6 +14,18 @@ export interface NetworkLoadBalancerEndpointProps {
    * @default 128
    */
   readonly weight?: number;
+
+  /**
+   * Forward the client IP address in the IP header of
+   * packets sent to the target.
+   *
+   * Client IP address preservation is supported only on
+   * NLBs with security groups among other restrictions.
+   * See the GlobalAccelerator Developer Guide for a list.
+   *
+   * @default false
+   */
+  readonly preserveClientIp?: boolean;
 }
 
 /**
@@ -31,6 +43,7 @@ export class NetworkLoadBalancerEndpoint implements ga.IEndpoint {
     return {
       endpointId: this.loadBalancer.loadBalancerArn,
       weight: this.options.weight,
+      clientIpPreservationEnabled: this.options.preserveClientIp,
     } as ga.CfnEndpointGroup.EndpointConfigurationProperty;
   }
 }

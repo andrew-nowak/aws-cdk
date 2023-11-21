@@ -104,6 +104,7 @@ listener.addEndpointGroup('Group', {
   endpoints: [
     new ga_endpoints.NetworkLoadBalancerEndpoint(nlb, {
       weight: 128,
+      preserveClientIp: true,
     }),
   ],
 });
